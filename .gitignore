@@ -1,2 +1,6 @@
 # Reference copy, not site content
 Math Department Brochure.pdf
+
+# Local Claude Code status line tooling, not part of this project
+ctx_count.py
+context_tracker.md
