@@ -105,29 +105,31 @@ class FlowchartScene(VoiceoverScene):
 class CalculusSequence(FlowchartScene):
     graph = CALCULUS_SEQUENCE
     steps = [
-        Step("For students considering a math major, the calculus sequence is one path through the first courses."),
-        Step("It begins with MTH 106, Calculus Foundations.", show=["MTH 106"]),
+        Step("If you're considering a math major, the calculus sequence is a great place to start. There are several options of where to begin."),
+        Step("If you've never taken calculus before and you think a year-long course is best for you, start with math 106, Calculus Foundations. "
+        "If you took calculus in high school, but still want a solid grounding in the fundamentals, you're still welcome to start here.", 
+        show=["MTH 106"]),
         Step(
-            "After Calculus Foundations, you can take MTH 111, Calculus with Analytic Geometry One.",
+            "Math 111 is our one-semester introductory calculus course. This course does not assume you've taken calculus before, and is a common first math class for students.",
             show=["MTH 111"],
             connect=[("MTH 106", "MTH 111")],
         ),
         Step(
-            "Next comes MTH 112, Calculus with Analytic Geometry Two.",
+            "Next comes Math 112, Calculus with Analytic Geometry Two. We recommend that you start here if you took AP calculus AB in high school and scored well on the AP exam.",
             show=["MTH 112"],
             connect=[("MTH 111", "MTH 112")],
         ),
         Step(
-            "From there, the path branches.",
+            "After Math 112, there are now two courses you can take.",
             highlight=["MTH 112"],
         ),
         Step(
-            "After MTH 112, you can take MTH 113, Multivariable Calculus,",
+            "You can continue with the traditional calculus sequence and take math 113, Multivariable Calculus. If you took both AP calculus AB and BC in high school, and scored well on both AP exams, you can even start here.",
             show=["MTH 113"],
             connect=[("MTH 112", "MTH 113")],
         ),
         Step(
-            "or MTH 251, Ordinary Differential Equations.",
+            "You can also take Math 251, Ordinary Differential Equations. This is a great option for students who are interested in applied mathematics or engineering.",
             show=["MTH 251"],
             connect=[("MTH 112", "MTH 251")],
         ),
@@ -137,23 +139,24 @@ class CalculusSequence(FlowchartScene):
 class FoundationalCourses(FlowchartScene):
     graph = FOUNDATIONAL_COURSES
     steps = [
-        Step("The foundational courses are a second path for students considering a math major."),
+        Step("Alongside the calculus sequence is our sequence of 'foundational' courses. These courses help you build your problem-solving skills, and introduce you to fundamental mathematics outside of calculus."),
         Step(
-            "Two of them are MTH 117, Discrete Mathematics, and MTH 121, Linear Algebra One.",
+            "The first two courses in this sequence are math 117, Discrete Mathematics, and Math 121, Linear Algebra One. Neither course has any prerequisites, but students generally take a calculus course before enrolling in these courses. "
+            "Additionally, students often find it helpful to take math 117 before taking math 121.",
             show=["MTH 117", "MTH 121"],
         ),
         Step(
-            "After Discrete Mathematics, you can take MTH 215, Axiomatic Systems.",
+            "Once you've taken math 117, you can take math 215, Axiomatic Systems.",
             show=["MTH 215"],
             connect=[("MTH 117", "MTH 215")],
         ),
         Step(
-            "Discrete Mathematics also leads to MTH 225, Linear Algebra Two.",
+            "Completing math 117 also allows you to take math 225, Linear Algebra Two.",
             show=["MTH 225"],
             connect=[("MTH 117", "MTH 225")],
         ),
         Step(
-            "And so does Linear Algebra One.",
+            "Alternatively, completing math 121 also allows you to take math 225.",
             connect=[("MTH 121", "MTH 225")],
         ),
     ]
