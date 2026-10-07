@@ -9,3 +9,6 @@ context_tracker.md
 .venv/
 media/
 __pycache__/
+
+# API keys for paid text-to-speech services
+.env

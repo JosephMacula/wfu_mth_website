@@ -23,7 +23,7 @@ from manim import (
 )
 import numpy as np
 from manim_voiceover import VoiceoverScene
-from manim_voiceover.services.gtts import GTTSService
+from manim_voiceover.services.gemini import GeminiService
 
 from course_graphs import CALCULUS_SEQUENCE, FOUNDATIONAL_COURSES, CourseGraph
 
@@ -52,7 +52,7 @@ class FlowchartScene(VoiceoverScene):
 
     def setup(self):
         self.camera.background_color = CREAM
-        self.set_speech_service(GTTSService(lang="en", tld="com"))
+        self.set_speech_service(GeminiService())
 
     def course_node(self, code: str) -> VGroup:
         course = self.graph.courses[code]

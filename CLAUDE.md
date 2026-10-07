@@ -8,7 +8,7 @@ This repo is a prototyping space for things to add to the Wake Forest University
 
 ## Narrated flowchart animations (`animations/`)
 
-Manim animations of the course flowcharts on page 2 of the brochure, narrated with `manim-voiceover` using gTTS. gTTS needs network access the first time each line is spoken; the audio is then cached under `media/`.
+Manim animations of the course flowcharts on page 2 of the brochure, narrated with `manim-voiceover` using Google's Gemini text-to-speech (`GeminiService`, default voice). Gemini needs a `GEMINI_API_KEY` in a gitignored `.env` at the repo root and network access the first time each line is spoken. It is a paid API, billed per line generated. The audio is then cached under `media/`, so only new or edited lines cost anything on later renders.
 
 Setup (system packages: `ffmpeg libcairo2-dev libpango1.0-dev pkg-config sox`):
 

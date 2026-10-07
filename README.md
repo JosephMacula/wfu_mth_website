@@ -25,13 +25,13 @@ cd animations
 ../.venv/bin/manim -qh flowcharts.py FoundationalCourses   # 1080p
 ```
 
-The videos are written to `animations/media/videos/flowcharts/<quality>/`, along with `.srt` subtitles. The first render needs internet access to generate the narration audio.
+The videos are written to `animations/media/videos/flowcharts/<quality>/`, along with `.srt` subtitles. The narration uses Google's Gemini text-to-speech, which needs an API key. Create one at https://aistudio.google.com/app/apikey and put it in a `.env` file at the repo root as `GEMINI_API_KEY=...`. That file is gitignored, so never commit the key. The first render needs internet access to generate the narration audio. The audio is then cached under `animations/media/`, so later renders only generate (and pay for) lines that changed.
 
 **Viewing:** VS Code's built-in video preview plays these videos without sound. To hear the narration, download the `.mp4` (right-click it in the Explorer, then **Download…**) and play it in a regular media player.
 
 ## Next step: rework the narration
 
-The current narration is a placeholder. The text is generic wording written from the flowcharts alone, and it is read by Google's free text-to-speech (gTTS), which sounds robotic.
+The current narration text is a placeholder: generic wording written from the flowcharts alone. The voice has already moved from Google's free, robotic-sounding gTTS to Gemini text-to-speech.
 
 1. **Script:** replace the generated text with a narration script prepared by the department, one passage per step of each animation.
-2. **Voice:** switch to a much more natural-sounding voice. That could be a higher-quality text-to-speech service or a recorded human voice. Because narration goes through manim-voiceover, this means changing the speech service, not the animation code.
+2. **Voice:** done for now with Gemini. A different Gemini voice, or a recorded human voice, is still an option. Because narration goes through manim-voiceover, changing it means changing the speech service in `FlowchartScene.setup`, not the animation code.

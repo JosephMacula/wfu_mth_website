@@ -1,2 +1,2 @@
 manim==0.21.0
-manim-voiceover[gtts]==0.4.0
+manim-voiceover[gtts,gemini]==0.4.0
