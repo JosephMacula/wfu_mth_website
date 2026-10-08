@@ -9,11 +9,14 @@ from dataclasses import dataclass, field
 from manim import (
     BOLD,
     DOWN,
+    LEFT,
     RIGHT,
     UP,
     Arrow,
+    Brace,
     FadeIn,
     GrowArrow,
+    GrowFromCenter,
     Indicate,
     LaggedStart,
     RoundedRectangle,
@@ -44,6 +47,7 @@ class Step:
     show: list[str] = field(default_factory=list)  # course codes
     connect: list[tuple[str, str]] = field(default_factory=list)  # edges
     highlight: list[str] = field(default_factory=list)  # already-shown courses
+    brace: list[str] = field(default_factory=list)  # courses whose brace to draw
 
 
 class FlowchartScene(VoiceoverScene):
@@ -86,6 +90,13 @@ class FlowchartScene(VoiceoverScene):
             max_stroke_width_to_length_ratio=100,
         )
 
+    def brace(self, code: str) -> Brace:
+        # The brace sits on the side of the group facing the braced course.
+        group = next(g for c, g in self.graph.braces if c == code)
+        boxes = VGroup(*(self.nodes[g] for g in group))
+        side = RIGHT if self.nodes[code].get_x() > boxes.get_x() else LEFT
+        return Brace(boxes, direction=side, buff=0.15, color=INK)
+
     def construct(self):
         self.nodes = {code: self.course_node(code) for code in self.graph.courses}
         title = Text(self.graph.name.upper(), font=FONT, weight=BOLD, color=DARK_GOLD, font_size=34)
@@ -96,6 +107,7 @@ class FlowchartScene(VoiceoverScene):
             with self.voiceover(text=step.narration) as tracker:
                 anims = [FadeIn(self.nodes[c], shift=0.2 * DOWN) for c in step.show]
                 anims += [GrowArrow(self.edge_arrow(a, b)) for a, b in step.connect]
+                anims += [GrowFromCenter(self.brace(c)) for c in step.brace]
                 anims += [Indicate(self.nodes[c], color=DARK_GOLD, scale_factor=1.08) for c in step.highlight]
                 if anims:
                     self.play(LaggedStart(*anims, lag_ratio=0.5), run_time=min(2.0, tracker.duration))
@@ -113,6 +125,12 @@ class CalculusSequence(FlowchartScene):
             "Math 111 is our one-semester introductory calculus course. This course does not assume you've taken calculus before, and is a common first math class for students.",
             show=["MTH 111"],
             connect=[("MTH 106", "MTH 111")],
+        ),
+        Step(
+            "Math 104 is a half semester course intended for future calculus students who want a comprehensive review of algebra and trigonometry before tackling Math 111 or Math 106. "
+            "The course is 2 credit hours with pass/fail grading.",
+            show=["MTH 104"],
+            brace=["MTH 104"],
         ),
         Step(
             "Next comes Math 112, Calculus with Analytic Geometry Two. We recommend that you start here if you took AP calculus AB in high school and scored well on the AP exam.",

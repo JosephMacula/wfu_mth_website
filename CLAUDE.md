@@ -26,8 +26,8 @@ cd animations
 
 Output goes to `animations/media/videos/flowcharts/<quality>/`, with an `.mp4`, a `.srt` subtitle file, and a `.wav`.
 
-- `course_graphs.py` holds the data. Each chart is a `CourseGraph` of courses and directed edges, where an edge `(a, b)` means course b can be taken after course a. It is deliberately not modeled as a strict prerequisite graph. Node positions are in manim scene units and follow the brochure's layout.
-- `flowcharts.py` holds the rendering. `FlowchartScene` turns a list of `Step`s (narration plus the courses to show, edges to draw, and courses to highlight) into voiceover blocks. Each chart is a subclass that only sets `graph` and `steps`.
+- `course_graphs.py` holds the data. Each chart is a `CourseGraph` of courses and directed edges, where an edge `(a, b)` means course b can be taken after course a. It is deliberately not modeled as a strict prerequisite graph. A graph can also have braces, where `(c, group)` draws a curly brace around the courses in `group`, pointing at course c, with no arrow (used for MTH 104 beside MTH 106 and MTH 111). Node positions are in manim scene units and follow the brochure's layout.
+- `flowcharts.py` holds the rendering. `FlowchartScene` turns a list of `Step`s (narration plus the courses to show, edges to draw, and courses to highlight) into voiceover blocks. A step can also draw the brace for a course with `brace=`. Each chart is a subclass that only sets `graph` and `steps`.
 
 ## Files in the working tree
 
